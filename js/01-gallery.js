@@ -2,13 +2,13 @@ import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
 
-// const galleryElem = document.querySelector('.gallery');
+const galleryElem = document.querySelector('.gallery');
+const galleryInsertHtml = createNewGallery(galleryItems)
 
 
-console.log(createNewGallery(images));
  
-function createNewGallery(images) {
-	return images
+function createNewGallery(galleryItems) {
+	return galleryItems
 		.map(({ preview, original, description }) => {
 			return `<div class="gallery__item">
   						<a class="gallery__link" href="${original}">
@@ -22,3 +22,7 @@ function createNewGallery(images) {
 	}).join("");	
 }
 
+ 
+galleryElem.insertAdjacentHTML("beforeend", galleryInsertHtml)
+
+console.log(galleryInsertHtml);
