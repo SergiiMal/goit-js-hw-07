@@ -5,7 +5,7 @@ import { galleryItems } from './gallery-items.js';
 const galleryElem = document.querySelector('.gallery');
 const galleryInsertHtml = createNewGallery(galleryItems)
 
-galleryElem.addEventListener('click', openModal)
+
  
 function createNewGallery(galleryItems) {
 	return galleryItems
@@ -28,5 +28,6 @@ galleryElem.insertAdjacentHTML("beforeend", galleryInsertHtml)
 const openModal = (e) => {
 	e.preventDefault();
 };
+galleryElem.addEventListener('click', openModal)
  
 console.log(galleryInsertHtml);
