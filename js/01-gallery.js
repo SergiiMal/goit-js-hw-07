@@ -1,11 +1,8 @@
 import { galleryItems } from './gallery-items.js';
+
 // Change code below this line
-
-
 const galleryElem = document.querySelector('.gallery');
-const galleryInsertHtml = createNewGallery(galleryItems)
-
-
+const galleryInsertHtml = createNewGallery(galleryItems);
  
 function createNewGallery(galleryItems) {
 	return galleryItems
@@ -19,15 +16,37 @@ function createNewGallery(galleryItems) {
 							/>
 						</a>
 						</div>`;
-	}).join("");	
+		})
+		.join('');	
+} 
+galleryElem.innerHTML = galleryInsertHtml;
+galleryElem.addEventListener('click', openModal);
+
+function openModal(event) {
+  event.preventDefault();
+  if (!event.target.classList.contains('gallery__image')) {
+    return;
+  }
+  const instance = basicLightbox.create(
+    `<img src="${event.target.dataset.source}" width="800" height="600">`,
+    {
+      onShow: instance => {
+        window.addEventListener('keydown', closeModal);
+      },
+      onClose: instance => {
+        window.removeEventListener('keydown', closeModal);
+      },
+    }
+  );
+  function closeModal(event) {
+    if (event.code === 'Escape') {
+      instance.close();
+    }
+  }
+  instance.show();
 }
 
- 
-galleryElem.insertAdjacentHTML("beforeend", galleryInsertHtml)
 
-const openModal = (e) => {
-	e.preventDefault();
-};
-galleryElem.addEventListener('click', openModal)
  
-console.log(galleryInsertHtml);
+
+
